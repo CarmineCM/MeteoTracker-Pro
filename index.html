@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://api.open-meteo.com https://geocoding-api.open-meteo.com; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com;">
+    <title>MeteoTracker Pro</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="bg-orbs" aria-hidden="true">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                    <circle cx="16" cy="14" r="7" fill="currentColor" opacity="0.9"/>
+                    <path d="M5 22c0-3.5 4.9-6 11-6s11 2.5 11 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.4"/>
+                    <path d="M2 26h28" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.2"/>
+                </svg>
+            </div>
+            <h1>MeteoTracker</h1>
+            <p class="subtitle">Previsioni meteo in tempo reale</p>
+        </header>
+
+        <div class="search-box">
+            <div class="search-input-wrapper">
+                <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+                </svg>
+                <input type="text" id="cityInput" placeholder="Cerca una città..." autocomplete="off" aria-label="Nome della città">
+            </div>
+            <button id="searchBtn" aria-label="Cerca">
+                <span>Cerca</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </button>
+        </div>
+
+        <div id="loading" class="hidden" role="status" aria-live="polite">
+            <div class="spinner" aria-hidden="true"></div>
+            <p>Ricerca in corso...</p>
+        </div>
+
+        <div id="errorBox" class="hidden" role="alert" aria-live="assertive"></div>
+
+        <div id="weatherResult" class="hidden">
+            <div class="location-info">
+                <div class="location-text">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 2a7 7 0 0 1 7 7c0 5.25-7 13-7 13S5 14.25 5 9a7 7 0 0 1 7-7z"/><circle cx="12" cy="9" r="2.5"/>
+                    </svg>
+                    <h2 id="cityName"></h2>
+                    <span id="countryCode" class="country-badge"></span>
+                </div>
+                <p class="forecast-label">Previsioni 7 giorni</p>
+            </div>
+            <div class="forecast-container" id="forecastCards" role="list"></div>
+        </div>
+
+        <footer class="attribution">
+            Dati forniti da <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
